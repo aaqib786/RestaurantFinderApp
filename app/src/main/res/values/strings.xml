@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Dott Challenge Aaqib</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="generic_error_message">Something went wrong. Please try again later.</string>
+    <string name="network_error">Unable to connect to the network. Please check your internet connection.</string>
+    <string name="location_permission_rationale">The app requires location permission to be able to provide the service properly.</string>
+    <string name="price">Price:</string>
+    <string name="rating">Rating:</string>
+</resources>

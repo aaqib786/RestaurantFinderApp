@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name='Dott Challenge Aaqib'

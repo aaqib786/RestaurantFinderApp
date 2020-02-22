@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.aaqibkhan.dottchallengeaaqib.model.Status" />
+        <import type="android.view.View"/>
+
+        <variable
+            name="restaurantViewModel"
+            type="com.aaqibkhan.dottchallengeaaqib.viewmodel.RestaurantViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minHeight="250dp"
+        android:paddingBottom="@dimen/margin_large">
+
+        <ProgressBar
+            android:id="@+id/sheet_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{restaurantViewModel.restaurant.status == Status.LOADING ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/sheet_empty_state_layout"
+            layout="@layout/fragment_restaurant_empty_state"
+            app:errorMessage="@{restaurantViewModel.restaurant.message}" />
+
+        <include
+            android:id="@+id/sheet_content_layout"
+            layout="@layout/fragment_restaurant_content"
+            app:restaurant="@{restaurantViewModel.restaurant.data}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

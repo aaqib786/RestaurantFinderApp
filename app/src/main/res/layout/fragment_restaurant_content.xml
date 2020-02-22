@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="restaurant"
+            type="com.aaqibkhan.dottchallengeaaqib.model.RestaurantDetail" />
+    </data>
+
+    <merge
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+        <ImageView
+            android:id="@+id/sheet_image"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            android:visibility="@{restaurant.bestPhoto.imageUrl == null ? View.GONE : View.VISIBLE}"
+            app:imageUrl="@{restaurant.bestPhoto.imageUrl}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/sheet_name"
+            style="@style/TitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:text="@{restaurant.name}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sheet_image" />
+
+        <ImageView
+            android:id="@+id/sheet_verified_badge"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="@dimen/margin_large"
+            android:src="@drawable/ic_verified_badge"
+            android:visibility="@{restaurant.verified ? View.VISIBLE : View.GONE}"
+            app:layout_constraintStart_toEndOf="@id/sheet_name"
+            app:layout_constraintTop_toTopOf="@id/sheet_name" />
+
+        <ImageView
+            android:id="@+id/sheet_like_badge"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:src="@drawable/ic_like"
+            android:visibility="@{restaurant == null ? View.GONE : View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sheet_name" />
+
+        <TextView
+            android:id="@+id/sheet_likes"
+            style="@style/BodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:text="@{String.valueOf(restaurant.likes.count)}"
+            android:visibility="@{restaurant == null ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/sheet_like_badge"
+            app:layout_constraintStart_toEndOf="@id/sheet_like_badge"
+            app:layout_constraintTop_toTopOf="@id/sheet_like_badge" />
+
+        <TextView
+            android:id="@+id/sheet_rating_text"
+            style="@style/BodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:text="@string/rating"
+            android:visibility="@{restaurant == null ? View.GONE : View.VISIBLE}"
+            app:layout_constraintStart_toEndOf="@id/sheet_likes"
+            app:layout_constraintTop_toTopOf="@id/sheet_likes" />
+
+        <TextView
+            android:id="@+id/sheet_rating_value"
+            style="@style/BodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:text="@{String.valueOf(restaurant.rating)}"
+            android:visibility="@{restaurant == null ? View.GONE : View.VISIBLE}"
+            app:layout_constraintStart_toEndOf="@id/sheet_rating_text"
+            app:layout_constraintTop_toTopOf="@id/sheet_rating_text" />
+
+        <TextView
+            android:id="@+id/sheet_hours"
+            style="@style/BodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:text="@{restaurant.hours.status}"
+            app:layout_constraintStart_toEndOf="@id/sheet_rating_value"
+            app:layout_constraintTop_toTopOf="@id/sheet_rating_value" />
+
+        <TextView
+            android:id="@+id/sheet_location"
+            style="@style/BodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="@{restaurant.location.getFullAddress()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sheet_like_badge" />
+
+        <TextView
+            android:id="@+id/sheet_contact"
+            style="@style/BodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="@{restaurant.contact.formattedPhone}"
+            android:visibility="@{restaurant.contact.formattedPhone == null ? View.GONE : View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sheet_location" />
+
+        <TextView
+            android:id="@+id/sheet_website"
+            style="@style/BodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="@{restaurant.url}"
+            android:visibility="@{restaurant.url == null ? View.GONE : View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sheet_contact" />
+
+        <TextView
+            android:id="@+id/sheet_price_text"
+            style="@style/BodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="@string/price"
+            android:visibility="@{restaurant == null ? View.GONE : View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sheet_website" />
+
+        <TextView
+            android:id="@+id/sheet_price_value"
+            style="@style/HeadingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:text="@{restaurant.price.getPriceToDisplay()}"
+            app:layout_constraintStart_toEndOf="@id/sheet_price_text"
+            app:layout_constraintTop_toTopOf="@id/sheet_price_text" />
+
+        <TextView
+            android:id="@+id/sheet_description"
+            style="@style/BodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="@{restaurant.description}"
+            android:visibility="@{restaurant.description == null ? View.GONE : View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sheet_price_text" />
+
+    </merge>
+
+</layout>

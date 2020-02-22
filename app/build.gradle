@@ -1,0 +1,69 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion buildVersion.compile_sdk
+    buildToolsVersion buildVersion.build_tools
+    defaultConfig {
+        applicationId "com.aaqibkhan.dottchallengeaaqib"
+        minSdkVersion buildVersion.min_sdk
+        targetSdkVersion buildVersion.target_sdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    dataBinding {
+        enabled = true
+    }
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:$supportLibVersion.app_compat"
+    implementation "androidx.core:core-ktx:$supportLibVersion.core_ktx"
+    implementation "androidx.constraintlayout:constraintlayout:$supportLibVersion.constraint_layout"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$supportLibVersion.lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$supportLibVersion.lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$supportLibVersion.lifecycle_version"
+    kapt "androidx.lifecycle:lifecycle-compiler:$supportLibVersion.lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$supportLibVersion.lifecycle_version"
+    implementation "androidx.activity:activity-ktx:$supportLibVersion.activity_ktx"
+    implementation "androidx.fragment:fragment-ktx:$supportLibVersion.fragment_ktx"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$libVersion.kotlinx_coroutines_android"
+    implementation "com.squareup.retrofit2:retrofit:$libVersion.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$libVersion.retrofit"
+    implementation "com.squareup.okhttp3:okhttp:$libVersion.okhttp"
+    implementation "com.squareup.picasso:picasso:$libVersion.picasso"
+    implementation "pub.devrel:easypermissions:$libVersion.easypermissions"
+    implementation "com.google.android.material:material:$googleLibVersion.material"
+    implementation "com.google.android.gms:play-services-maps:$googleLibVersion.play_services"
+    implementation "com.google.android.gms:play-services-location:$googleLibVersion.play_services"
+    implementation "com.google.maps.android:android-maps-utils:$googleLibVersion.maps_utils"
+
+    testImplementation "junit:junit:$testVersion.junit"
+    testImplementation "androidx.arch.core:core-testing:$testVersion.arch_core"
+    testImplementation "androidx.test:core:$testVersion.core"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$testVersion.mockito_kotlin"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$testVersion.kotlinx_coroutines"
+
+    androidTestImplementation "androidx.test.ext:junit:$androidTestVersion.junit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidTestVersion.espresso_core"
+}
